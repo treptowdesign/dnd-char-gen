@@ -3,44 +3,40 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import styles from './page.module.css';
-// import '@/app/test.sass';
-import OpenAI from 'openai';
 
 export default function Prompt({apiKey} : {apiKey: string}) {
   const [response, setResponse] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [prompt, setPrompt] = useState('');
 
-  // const openai = new OpenAI();
-  const openai = new OpenAI({
-    apiKey: apiKey,
-    dangerouslyAllowBrowser: true
-  });
-
-  const fetchHaiku = async () => {
+  const fetchResponse = async () => {
     if (!prompt.trim()) {
-        console.log('Prompt is empty. Please provide a valid input.');
-        return;
+      console.log('Prompt is empty. Please provide valid input.');
+      return;
     }
+
     try {
       setLoading(true);
-      const completion = await openai.chat.completions.create({
-        model: 'gpt-4o-mini',
-        messages: [
-          { role: 'system', content: 'You are a helpful assistant.' },
-          { role: 'user', content: prompt },
-        ],
+      setResponse(null);
+
+      const res = await fetch('/api/openai', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt }),
       });
-      setResponse(completion.choices[0].message?.content || 'No response returned.');
-      // log token usage... 
-      if (completion.usage?.total_tokens !== undefined) {
-        console.log('Tokens:', completion.usage.total_tokens);
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setResponse(data.response);
+        console.log('Tokens used:', data.total_tokens);
       } else {
-        console.log('Total tokens not available.');
+        console.error('Error:', data.error);
+        setResponse('Failed to fetch response.');
       }
     } catch (error) {
-      console.error('Error fetching response:', error);
-      setResponse('Failed to fetch response.');
+      console.error('Error fetching from API route:', error);
+      setResponse('Error occurred while fetching response.');
     } finally {
       setLoading(false);
     }
@@ -57,7 +53,7 @@ export default function Prompt({apiKey} : {apiKey: string}) {
             onChange={(e) => setPrompt(e.target.value)}
         />
 
-        <button onClick={fetchHaiku} disabled={loading} className={styles.button}>
+        <button onClick={fetchResponse} disabled={loading} className={styles.button}>
           {loading ? 'Loading...' : 'Generate Response'}
         </button>
 
