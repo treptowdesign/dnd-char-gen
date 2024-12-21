@@ -39,7 +39,7 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({
-      response: completion.choices[0]?.message?.content || 'No response returned.',
+      response: JSON.parse(completion.choices[0]?.message?.content || '{}'),
       total_tokens: completion.usage?.total_tokens || 0,
     });
 

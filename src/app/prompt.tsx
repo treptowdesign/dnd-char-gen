@@ -2,9 +2,11 @@
 
 import React, { useState } from 'react';
 import  "@/app/prompt.sass";
+import  Stats from "@/app/stats";
+import { CharacterSheet } from "@/app/schema/characterSheet"; // character sheet schema
 
 export default function Prompt({apiKey} : {apiKey: string}) {
-  const [response, setResponse] = useState<string | null>(null);
+  const [response, setResponse] = useState<CharacterSheet | null>(null);
   const [loading, setLoading] = useState(false);
   const [prompt, setPrompt] = useState('');
 
@@ -27,15 +29,15 @@ export default function Prompt({apiKey} : {apiKey: string}) {
       const data = await res.json();
 
       if (res.ok) {
-        setResponse(data.response);
+        setResponse(data.response as CharacterSheet);
         console.log('Tokens used:', data.total_tokens);
       } else {
         console.error('Error:', data.error);
-        setResponse('Failed to fetch response.');
+        // setResponse('Failed to fetch response.');
       }
     } catch (error) {
       console.error('Error fetching from API route:', error);
-      setResponse('Error occurred while fetching response.');
+      // setResponse('Error occurred while fetching response.');
     } finally {
       setLoading(false);
     }
@@ -56,10 +58,7 @@ export default function Prompt({apiKey} : {apiKey: string}) {
         </button>
 
         {response && (
-          <div className="response-text">
-            <h2>AI Response:</h2>
-            <p>{response}</p>
-          </div>
+          <Stats character={response} />
         )}
     </div>
   );

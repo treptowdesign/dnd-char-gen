@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+// zod object
 export const characterSheet = z.object({
     name: z.string().describe("The name of the character"),
     class: z.enum([
@@ -31,8 +32,11 @@ export const characterSheet = z.object({
     skills: z.array(z.string()).describe("A list of skills the character is proficient in"),
     equipment: z.array(z.string()).describe("A list of equipment the character carries"),
     spells: z.array(z.string()).optional().describe("A list of spells the character knows, if applicable"),
-    hitPoints: z.number().int().describe("The current hit points of the character"),
+    hitPoints: z.number().int().describe("The total hit points of the character"),
     armorClass: z.number().int().describe("The armor class of the character"),
     speed: z.number().int().describe("The speed of the character in feet per round"),
     backstory: z.string().describe("Text blurb about the character and his/her background and history")
 });
+
+// inferred TypeScript type
+export type CharacterSheet = z.infer<typeof characterSheet>;
