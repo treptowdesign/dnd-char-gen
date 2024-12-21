@@ -1,8 +1,7 @@
 'use client'; 
 
 import React, { useState } from 'react';
-import Image from 'next/image';
-import styles from './page.module.css';
+import  "@/app/prompt.sass";
 
 export default function Prompt({apiKey} : {apiKey: string}) {
   const [response, setResponse] = useState<string | null>(null);
@@ -43,8 +42,7 @@ export default function Prompt({apiKey} : {apiKey: string}) {
   };
 
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
+    <div className="prompt">
 
         <input
             type="text"
@@ -53,7 +51,7 @@ export default function Prompt({apiKey} : {apiKey: string}) {
             onChange={(e) => setPrompt(e.target.value)}
         />
 
-        <button onClick={fetchResponse} disabled={loading} className={styles.button}>
+        <button onClick={fetchResponse} disabled={loading}>
           {loading ? 'Loading...' : 'Generate Response'}
         </button>
 
@@ -63,16 +61,6 @@ export default function Prompt({apiKey} : {apiKey: string}) {
             <p>{response}</p>
           </div>
         )}
-
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-      </main>
     </div>
   );
 }
