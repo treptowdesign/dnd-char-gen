@@ -5,7 +5,7 @@ import  "@/app/prompt.sass";
 import  Stats from "@/app/stats";
 import { CharacterSheet } from "@/app/schema/characterSheet"; // character sheet schema
 
-export default function Prompt({apiKey} : {apiKey: string}) {
+export default function Prompt() {
   const [response, setResponse] = useState<CharacterSheet | null>(null);
   const [loading, setLoading] = useState(false);
   const [prompt, setPrompt] = useState('');
@@ -33,11 +33,9 @@ export default function Prompt({apiKey} : {apiKey: string}) {
         console.log('Tokens used:', data.total_tokens);
       } else {
         console.error('Error:', data.error);
-        // setResponse('Failed to fetch response.');
       }
     } catch (error) {
       console.error('Error fetching from API route:', error);
-      // setResponse('Error occurred while fetching response.');
     } finally {
       setLoading(false);
     }

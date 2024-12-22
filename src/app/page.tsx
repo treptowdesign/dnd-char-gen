@@ -4,23 +4,18 @@ import styles from "./page.module.css";
 import  "@/app/test.sass";
 import  Prompt from "@/app/prompt";
 
-const apiKey = process.env.SECRET_API_KEY!
-
-// const List = ({children} : { children: ReactNode }) => {
-//   return (
-//     <ul className="list">
-//       {children}
-//     </ul>
-//   )
-// }
 
 export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <Prompt apiKey={apiKey} />
-
-        <Image
+        <h1>D&D Character Generator</h1>
+        <p>Enter a character idea</p>
+        <Prompt />
+      </main>
+      
+      <footer className={styles.footer}>
+      <Image
           className={styles.logo}
           src="/next.svg"
           alt="Next.js logo"
@@ -28,10 +23,6 @@ export default function Home() {
           height={38}
           priority
         />
-        
-      </main>
-      <footer className={styles.footer}>
-        {/* Footer */}
       </footer>
     </div>
   );
