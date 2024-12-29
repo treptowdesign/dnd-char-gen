@@ -4,11 +4,14 @@ import styles from "./page.module.css";
 import  "@/app/test.sass";
 import  Prompt from "@/app/prompt";
 
+import RegisterForm from '@/app/components/RegisterForm';
+
 
 export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
+        <RegisterForm />
         <h1>D&D Character Generator</h1>
         <p>Enter a character idea</p>
         <Prompt />
