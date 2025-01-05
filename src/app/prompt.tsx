@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import  "@/app/prompt.sass";
 import  Stats from "@/app/stats";
-import { CharacterSheet } from "@/app/schema/characterSheet"; // character sheet schema
+import { CharacterSheet } from "@/schema/characterSheet"; // character sheet schema
 
 export default function Prompt() {
   const [response, setResponse] = useState<CharacterSheet | null>(null);

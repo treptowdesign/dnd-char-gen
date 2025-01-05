@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import { zodResponseFormat } from "openai/helpers/zod";
-import { characterSheet } from "@/app/schema/characterSheet"; // character sheet schema
+import { characterSheet } from "@/schema/characterSheet"; // character sheet schema
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY!, 

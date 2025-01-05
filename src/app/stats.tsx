@@ -1,5 +1,5 @@
 import React from "react";
-import { CharacterSheet } from "@/app/schema/characterSheet"; // character sheet schema
+import { CharacterSheet } from "@/schema/characterSheet"; // character sheet schema
 
 interface StatsProps {
     character: CharacterSheet;

@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <h1>D&D Character Generator</h1>
+        <h1>D&D Character Generator!!</h1>
         <p>Enter a character idea</p>
         <Prompt />
       </main>
