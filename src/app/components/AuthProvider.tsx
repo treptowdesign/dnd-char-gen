@@ -20,7 +20,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    // Check for stored user session in cookies
+    // check for stored user session in cookies
     const token = getCookie('authToken');
     const storedUser = getCookie('user');
   
