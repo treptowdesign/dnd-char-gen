@@ -4,19 +4,12 @@ import styles from "./page.module.css";
 import  "@/app/test.sass";
 import  Prompt from "@/app/prompt";
 
-import LoginForm from '@/app/components/LoginForm';
-import RegisterForm from '@/app/components/RegisterForm';
-import LogoutButton from '@/app/components/LogoutButton';
-
 import AuthNav from '@/app/components/AuthNav';
 
 export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        {/* <LoginForm />
-        <RegisterForm />
-        <LogoutButton /> */}
         <AuthNav />
         <h1>D&D Character Generator!!</h1>
         <p>Enter a character idea</p>

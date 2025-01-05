@@ -10,8 +10,8 @@ type User = {
 
 type AuthContextType = {
   user: User | null;
-  login: (user: User, token: string) => void;
-  logout: () => void;
+  login: (user: User, token: string) => void; 
+  logout: () => void; 
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);

@@ -6,6 +6,8 @@ export default function LogoutButton() {
   const { user, logout } = useAuth();
 
   return (
-    <button onClick={logout}>Logout</button>
+    <button onClick={logout}>
+      {user ? `Logout (${user.email})` : 'Logout'}
+    </button>
   );
 }
