@@ -7,7 +7,7 @@ export default function LogoutButton() {
 
   return (
     <button onClick={logout}>
-      {user ? `Logout (${user.email})` : 'Logout'}
+      {user ? `Logout (${user.email})` : 'Logout'} 
     </button>
   );
 }

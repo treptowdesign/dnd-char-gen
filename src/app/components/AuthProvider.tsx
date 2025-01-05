@@ -16,8 +16,8 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+export function AuthProvider({ children } : { children: React.ReactNode }) { 
+  const [user, setUser] = useState<User | null>(null); 
 
   useEffect(() => {
     // check for stored user session in cookies
