@@ -1,8 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import { useAuth } from './AuthProvider';
 
 export default function RegisterForm() {
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -18,7 +20,7 @@ export default function RegisterForm() {
 
     const data = await res.json();
     if (res.ok) {
-      setMessage('Registration successful! You can now log in.');
+      login(data.user, data.token); // Automatically log in the user after registration
     } else {
       setMessage(data.error || 'Error registering.');
     }
