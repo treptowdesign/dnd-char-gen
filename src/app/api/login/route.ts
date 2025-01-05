@@ -4,7 +4,11 @@ import jwt from 'jsonwebtoken';
 import prisma from '@/models/prismaClient';
 import { setCookie } from 'cookies-next';
 
-const SECRET_KEY = process.env.JWT_SECRET || 'your-secret-key';
+// const SECRET_KEY = process.env.JWT_SECRET || 'your-secret-key';
+const SECRET_KEY = process.env.JWT_SECRET as string;
+if (!SECRET_KEY) {
+  throw new Error('Missing JWT_SECRET in environment variables');
+}
 
 export async function POST(req: Request) {
   try {
