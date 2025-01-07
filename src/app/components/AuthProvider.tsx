@@ -21,8 +21,8 @@ export function AuthProvider({ children } : { children: React.ReactNode }) {
 
   useEffect(() => {
     // check for stored user session in cookies
-    const token = getCookie('authToken');
-    const storedUser = getCookie('user');
+    const token = getCookie('chargen_authToken_client');
+    const storedUser = getCookie('chargen_user_client');
   
     if (token && typeof storedUser === 'string') {
       try {
@@ -35,16 +35,15 @@ export function AuthProvider({ children } : { children: React.ReactNode }) {
 
   const login = (user: User, token: string) => {
     setUser(user);
-    setCookie('user', JSON.stringify(user), { maxAge: 60 * 60 * 24 });
-    // may not actually need this
-    // client side cookie (httpOnly: false) so it can be accessed by JS
-    setCookie('authToken', token, { maxAge: 60 * 60 * 24, httpOnly: false }); 
+    setCookie('chargen_user_client', JSON.stringify(user), { maxAge: 60 * 60 * 24 });
+    setCookie('chargen_authToken_client', token, { maxAge: 60 * 60 * 24, httpOnly: false }); 
   };
 
-  const logout = () => {
+  const logout = async () => {
+    await fetch('/api/logout', { method: 'POST' }); // call route to clear server cookie
     setUser(null);
-    deleteCookie('authToken'); // see above note about this cookie...
-    deleteCookie('user');
+    deleteCookie('chargen_user_client');
+    deleteCookie('chargen_authToken_client');
   };
 
   return (

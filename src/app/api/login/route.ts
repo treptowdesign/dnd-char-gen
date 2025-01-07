@@ -24,10 +24,20 @@ export async function POST(req: Request) {
       expiresIn: '1d',
     });
 
-    // Set HTTP-only cookie
-    setCookie('authToken', token, { httpOnly: true, maxAge: 60 * 60 * 24 });
+    const response = NextResponse.json({ message: 'Login successful', user });
+    // console.log('Set-Cookie header added:', response.headers.get('Set-Cookie')); // Debugging
 
-    return NextResponse.json({ message: 'Login successful', user, token });
+    response.headers.set(
+      'Set-Cookie',
+      `chargen_authToken_server=${token}; HttpOnly; Path=/; Max-Age=${60 * 60 * 24}; SameSite=Strict`
+    );
+
+    // Set HTTP-only cookie
+    // setCookie('chargen_authToken_server', token, { httpOnly: true, maxAge: 60 * 60 * 24 });
+
+    // return NextResponse.json({ message: 'Login successful', user, token });
+
+    return response;
   } catch (error) {
     console.error('Login error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

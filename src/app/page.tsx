@@ -6,11 +6,15 @@ import  Prompt from "@/app/prompt";
 
 import AuthNav from '@/app/components/AuthNav';
 
+import TestBtn from '@/app/components/TestBtn';
+
 export default function Home() {
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
         <AuthNav />
+        <TestBtn />
         <h1>D&D Character Generator!!</h1>
         <p>Enter a character idea</p>
         <Prompt />

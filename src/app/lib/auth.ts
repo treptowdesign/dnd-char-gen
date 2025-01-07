@@ -8,7 +8,7 @@ if (!SECRET_KEY) {
 
 export async function getUserFromServer() {
   const cookieStore = await cookies();
-  const token = cookieStore.get('authToken')?.value; // get token from cookies
+  const token = cookieStore.get('chargen_authToken_server')?.value; // get token from cookies
 
   if (!token) return null;
 
