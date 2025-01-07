@@ -29,9 +29,16 @@ export async function POST(req: Request) {
       expiresIn: '1d',
     });
 
-    setCookie('authToken', token, { httpOnly: true, maxAge: 60 * 60 * 24 });
+    // setCookie('authToken', token, { httpOnly: true, maxAge: 60 * 60 * 24 });
 
-    return NextResponse.json({ message: 'User registered', user: newUser, token });
+    const response = NextResponse.json({ message: 'User registered', user: newUser, token });
+
+    response.headers.set(
+      'Set-Cookie',
+      `chargen_authToken_server=${token}; HttpOnly; Path=/; Max-Age=${60 * 60 * 24}; SameSite=Strict`
+    );
+
+    return response;
   } catch (error) {
     console.error('Registration error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
