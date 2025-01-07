@@ -35,13 +35,15 @@ export function AuthProvider({ children } : { children: React.ReactNode }) {
 
   const login = (user: User, token: string) => {
     setUser(user);
-    setCookie('authToken', token, { maxAge: 60 * 60 * 24, httpOnly: false });
     setCookie('user', JSON.stringify(user), { maxAge: 60 * 60 * 24 });
+    // may not actually need this
+    // client side cookie (httpOnly: false) so it can be accessed by JS
+    setCookie('authToken', token, { maxAge: 60 * 60 * 24, httpOnly: false }); 
   };
 
   const logout = () => {
     setUser(null);
-    deleteCookie('authToken');
+    deleteCookie('authToken'); // see above note about this cookie...
     deleteCookie('user');
   };
 
