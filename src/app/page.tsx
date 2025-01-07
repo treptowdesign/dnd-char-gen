@@ -4,6 +4,7 @@ import styles from "./page.module.css";
 import  "@/app/test.sass";
 import  Prompt from "@/app/prompt";
 
+import PageNav from '@/app/components/PageNav';
 import AuthNav from '@/app/components/AuthNav';
 
 import TestBtn from '@/app/components/TestBtn';
@@ -13,9 +14,10 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
+        <PageNav />
         <AuthNav />
         <TestBtn />
-        <h1>D&D Character Generator</h1>
+        <h1>D&D Character Generator Home</h1>
         <p>Enter a character idea</p>
         <Prompt />
       </main>

@@ -24,7 +24,7 @@ export async function POST(req: Request) {
       expiresIn: '1d',
     });
 
-    const response = NextResponse.json({ message: 'Login successful', user });
+    const response = NextResponse.json({ message: 'Login successful', user, token });
     // console.log('Set-Cookie header added:', response.headers.get('Set-Cookie')); // Debugging
 
     response.headers.set(
