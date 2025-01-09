@@ -8,13 +8,13 @@ if (!SECRET_KEY) {
 
 export async function getUserFromServer() {
   const cookieStore = await cookies();
-  const token = cookieStore.get('chargen_authToken_server')?.value; // get token from cookies
+  const token = cookieStore.get('chargen_authToken_server')?.value; 
 
   if (!token) return null;
 
   try {
-    const decoded = jwt.verify(token, SECRET_KEY); // verify token
-    return decoded as { id: number; email: string }; // return user info
+    const decoded = jwt.verify(token, SECRET_KEY);
+    return decoded as { id: number; email: string };
   } catch (error) {
     console.error('Invalid or expired auth token:', error);
     return null;
