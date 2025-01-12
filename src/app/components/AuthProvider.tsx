@@ -22,14 +22,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
-    
+
     const storedData = getCookie("chargen_authToken_client");
 
     if (storedData && typeof storedData === "string") {
-      try {
-        // try parsing the stored JSON data
+      try { // try parsing the stored JSON data
         const parsedData = JSON.parse(storedData);
-
         if (parsedData?.user && parsedData?.token) {
           setUser(parsedData.user);
           setToken(parsedData.token);
@@ -43,8 +41,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const login = (user: User, token: string) => {
     setUser(user);
     setToken(token);
-    const payload = JSON.stringify({ user, token });
-    setCookie("chargen_authToken_client", payload, {
+    setCookie("chargen_authToken_client", JSON.stringify({ user, token }), {
       maxAge: 60 * 60 * 24, // 1-day expiration
       httpOnly: false,
     });
