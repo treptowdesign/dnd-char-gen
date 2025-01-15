@@ -1,5 +1,7 @@
 "use client";
 
+import PageNav from '@/app/components/PageNav';
+
 import { useState, useEffect } from "react";
 import { useAuth } from "@/app/components/AuthProvider";
 
@@ -101,6 +103,7 @@ export default function PostsPage() {
 
   return (
     <div className="posts-container">
+        <PageNav />
       <h1>My Posts</h1>
 
       {user ? (
