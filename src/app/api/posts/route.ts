@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from '@/models/prismaClient';
-import { getUserFromServer } from "@/app/lib/auth";
+import { getUserFromServer } from "@/app/lib/auth"; // server side auth
 
+// create
 export async function POST(req: NextRequest) {
   try {
     const user = await getUserFromServer();
@@ -23,6 +24,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
+// read
 export async function GET(req: NextRequest) {
   try {
     const user = await getUserFromServer();
@@ -40,6 +42,7 @@ export async function GET(req: NextRequest) {
   }
 }
 
+// update
 export async function PUT(req: NextRequest) {
   try {
     const user = await getUserFromServer();
@@ -62,6 +65,7 @@ export async function PUT(req: NextRequest) {
   }
 }
 
+// delete
 export async function DELETE(req: NextRequest) {
   try {
     const user = await getUserFromServer();

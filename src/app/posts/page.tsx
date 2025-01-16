@@ -1,9 +1,9 @@
 "use client";
 
-import PageNav from '@/app/components/PageNav';
-
 import { useState, useEffect } from "react";
-import { useAuth } from "@/app/components/AuthProvider";
+import { useAuth } from "@/app/components/AuthProvider"; // client side auth
+
+import PageNav from '@/app/components/PageNav';
 
 type Post = {
   id: number;
