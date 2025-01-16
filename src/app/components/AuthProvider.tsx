@@ -11,6 +11,7 @@ type User = {
 type AuthContextType = {
   user: User | null;
   token: string | null;
+  loading: boolean;
   login: (user: User, token: string) => void;
   logout: () => void;
 };
@@ -20,6 +21,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
 
@@ -34,8 +36,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
       } catch (error) {
         console.error("Error parsing auth token from cookie:", error);
-      }
+      } 
     }
+    setLoading(false);
   }, []);
 
   const login = (user: User, token: string) => {
@@ -51,11 +54,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     await fetch("/api/logout", { method: "POST" }); // call server to clear cookie
     setUser(null);
     setToken(null);
-    deleteCookie("chargen_authToken_client"); // remove the combined cookie
+    deleteCookie("chargen_authToken_client"); 
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <AuthContext.Provider value={{ user, token, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

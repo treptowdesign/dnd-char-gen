@@ -1,18 +1,23 @@
 'use client';
 
+import { useState } from 'react';
 import { useAuth } from './AuthProvider';
 
 import LoginForm from '@/app/components/LoginForm';
 import RegisterForm from '@/app/components/RegisterForm'; 
 import LogoutButton from '@/app/components/LogoutButton';
-import { useState } from 'react';
+
 
 export default function AuthNav() {
-  const { user } = useAuth(); 
+  const { user, loading } = useAuth(); 
   const [displayLogin, setDisplayLogin] = useState(true);
 
   const toggleLogin = () => {
     setDisplayLogin(!displayLogin); 
+  }
+
+  if (loading) { // wait for auth check
+    return <div>Loading...</div>; 
   }
 
   return (
