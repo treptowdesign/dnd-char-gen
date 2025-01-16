@@ -101,9 +101,15 @@ export default function PostsPage() {
     setLoading(false);
   };
 
+  const handleCancelEditing = () => {
+    setEditingPost(null);
+    setTitle("");
+    setContent("");
+  };
+
   return (
     <div className="posts-container">
-        <PageNav />
+      <PageNav />
       <h1>My Posts</h1>
 
       {user ? (
@@ -130,7 +136,7 @@ export default function PostsPage() {
               </button>
             )}
             {editingPost && (
-              <button onClick={() => setEditingPost(null)}>Cancel Edit</button>
+              <button onClick={handleCancelEditing}>Cancel Edit</button>
             )}
           </div>
 
