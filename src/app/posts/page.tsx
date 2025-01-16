@@ -12,7 +12,7 @@ type Post = {
 };
 
 export default function PostsPage() {
-  const { user, token } = useAuth();
+  const { user, token, authLoading } = useAuth();
   const [posts, setPosts] = useState<Post[]>([]);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -106,12 +106,25 @@ export default function PostsPage() {
     setContent("");
   };
 
+  if (authLoading) { // wait for auth check
+    return(
+      <div className={styles.page}>
+        <main className={styles.main}>
+          <div className={styles.container}>
+            Loading... 
+          </div>
+        </main>
+      </div>
+    ); 
+  }
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
         <div className={styles.container}>
 
           <h1 className={styles.title}>My Posts</h1>
+
           {user ? (
             <>
               <form
@@ -161,7 +174,6 @@ export default function PostsPage() {
                   </div>
                 </div>
               </form>
-
               <ul className={styles.postlist}>
                 {posts.length > 0 ? (
                   posts.map((post) => (
@@ -191,6 +203,8 @@ export default function PostsPage() {
           ) : (
             <p>Please log in to manage posts.</p>
           )}
+
+
           
         </div>
       </main>

@@ -9,14 +9,14 @@ import LogoutButton from '@/app/components/LogoutButton';
 
 
 export default function AuthNav() {
-  const { user, loading } = useAuth(); 
+  const { user, authLoading } = useAuth(); 
   const [displayLogin, setDisplayLogin] = useState(true);
 
   const toggleLogin = () => {
     setDisplayLogin(!displayLogin); 
   }
 
-  if (loading) { // wait for auth check
+  if (authLoading) { // wait for auth check
     return <div>Loading...</div>; 
   }
 
