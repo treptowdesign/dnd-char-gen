@@ -1,8 +1,6 @@
 import React, { ReactNode } from 'react';
-import Image from "next/image";
 import styles from "@/app/page.module.css";
 import  "@/app/test.sass";
-
 
 const List = ({children} : { children: ReactNode }) => {
   return (
@@ -12,7 +10,7 @@ const List = ({children} : { children: ReactNode }) => {
   )
 }
 
-export default function Home() {
+export default function About() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>

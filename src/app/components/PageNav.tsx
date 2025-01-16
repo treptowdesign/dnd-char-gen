@@ -10,6 +10,7 @@ export default function PageNav() {
     { href: '/', label: 'Home' },
     { href: '/dashboard', label: 'Dashboard' },
     { href: '/posts', label: 'Posts' },
+    { href: '/about', label: 'About' },
   ]; 
   return (
     <>
