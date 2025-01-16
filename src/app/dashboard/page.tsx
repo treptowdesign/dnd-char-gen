@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import styles from "@/app/dashboard/dashboard.module.sass";
+import styles from "@/app/dashboard/page.module.sass";
 
 export default function Dashboard() {
     const [count, setCount] = useState(0);

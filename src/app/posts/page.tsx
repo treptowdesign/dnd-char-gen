@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import styles from "@/app/posts/page.module.sass";
 import { useAuth } from "@/app/components/AuthProvider"; // client side auth
 
 type Post = {
@@ -106,66 +107,78 @@ export default function PostsPage() {
   };
 
   return (
-    <div className="posts-container">
-      <h1>My Posts</h1>
+    <div className={styles.page}>
+      <main className={styles.main}>
+        <div className={styles.container}>
 
-      {user ? (
-        <>
-          <div className="post-form">
-            <input
-              type="text"
-              placeholder="Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <textarea
-              placeholder="Content"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-            />
-            {editingPost ? (
-              <button onClick={handleUpdatePost} disabled={loading}>
-                {loading ? "Updating..." : "Update Post"}
-              </button>
-            ) : (
-              <button onClick={handleCreatePost} disabled={loading}>
-                {loading ? "Creating..." : "Create Post"}
-              </button>
-            )}
-            {editingPost && (
-              <button onClick={handleCancelEditing}>Cancel Edit</button>
-            )}
-          </div>
-
-          <ul className="posts-list">
-            {posts.length > 0 ? (
-              posts.map((post) => (
-                <li key={post.id} className="post-item">
-                  <h3>{post.title}</h3>
-                  <p>{post.content}</p>
-                  <small>{new Date(post.createdAt).toLocaleDateString()}</small>
-                  <div className="post-actions">
-                    <button
-                      onClick={() => {
-                        setEditingPost(post);
-                        setTitle(post.title);
-                        setContent(post.content);
-                      }}
-                    >
-                      Edit
-                    </button>
-                    <button onClick={() => handleDeletePost(post.id)}>Delete</button>
+          <h1 className={styles.title}>My Posts</h1>
+          {user ? (
+            <>
+              <div className={styles.postform}>
+                <div className={styles.control}>
+                  <input
+                    type="text"
+                    placeholder="Title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                </div>
+                <div className={styles.control}>
+                  <textarea
+                    placeholder="Content"
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                  />
+                </div>
+                <div className={styles.control}>
+                  <div className={styles.buttonrow}> 
+                    {editingPost ? (
+                      <button onClick={handleUpdatePost} disabled={loading}>
+                        {loading ? "Updating..." : "Update Post"}
+                      </button>
+                    ) : (
+                      <button onClick={handleCreatePost} disabled={loading}>
+                        {loading ? "Creating..." : "Create Post"}
+                      </button>
+                    )}
+                    {editingPost && (
+                      <button onClick={handleCancelEditing}>Cancel Edit</button>
+                    )}
                   </div>
-                </li>
-              ))
-            ) : (
-              <p>No posts found. Create one above!</p>
-            )}
-          </ul>
-        </>
-      ) : (
-        <p>Please log in to manage posts.</p>
-      )}
+                </div>
+              </div>
+              <ul className={styles.postlist}>
+                {posts.length > 0 ? (
+                  posts.map((post) => (
+                    <li key={post.id} className={styles.postitem}>
+                      <h3>{post.title}</h3>
+                      <p>{post.content}</p>
+                      <small>{new Date(post.createdAt).toLocaleDateString()}</small>
+                      <div className={styles.buttonrow}>
+                        <button
+                          onClick={() => {
+                            setEditingPost(post);
+                            setTitle(post.title);
+                            setContent(post.content);
+                          }}
+                        >
+                          Edit
+                        </button>
+                        <button onClick={() => handleDeletePost(post.id)}>Delete</button>
+                      </div>
+                    </li>
+                  ))
+                ) : (
+                  <p>No posts found. Create one above!</p>
+                )}
+              </ul>
+            </>
+          ) : (
+            <p>Please log in to manage posts.</p>
+          )}
+          
+        </div>
+      </main>
     </div>
   );
 }

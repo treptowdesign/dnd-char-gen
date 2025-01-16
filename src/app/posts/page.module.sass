@@ -1,0 +1,70 @@
+// Dashboard SASS module 
+@use "sass:color"
+
+$text-color: #fff
+
+.page
+  --gray-rgb: 0, 0, 0
+  --gray-alpha-200: rgba(var(--gray-rgb), 0.08)
+  --gray-alpha-100: rgba(var(--gray-rgb), 0.05)
+  --button-primary-hover: #383838
+  --button-secondary-hover: #f2f2f2
+  // display: grid
+  // grid-template-rows: 20px 1fr 20px
+  align-items: center
+  justify-items: center
+  min-height: 100svh
+  padding: 80px
+  gap: 64px
+  font-family: var(--font-geist-sans)
+
+.main
+  display: flex
+  flex-direction: column
+  gap: 32px
+  grid-row-start: 2
+
+.container
+  padding: 1em 3em
+  border-radius: 8px
+  color: $text-color
+
+.title
+  font-size: 24px
+  font-weight: bold
+  margin-bottom: 10px
+
+.postform 
+  display: flex
+  flex-direction: column
+  gap: 0.5rem 
+  border: solid 1px #222
+  padding: 1rem
+
+.postlist 
+  display: block
+  border: solid 1px #222 
+  li 
+    display: block 
+    padding: 1rem
+
+.postitem 
+  display: block 
+  small 
+    display: block
+    margin-bottom: 0.5em
+  
+.control 
+  display: flex
+  input,
+  textarea 
+    padding: 0.5rem
+
+.buttonrow
+  display: flex
+  gap: 0.5rem
+  justify-content: flex-start
+  button 
+    padding: 0.25rem 0.5rem
+
+
