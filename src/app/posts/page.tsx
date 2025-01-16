@@ -114,13 +114,20 @@ export default function PostsPage() {
           <h1 className={styles.title}>My Posts</h1>
           {user ? (
             <>
-              <div className={styles.postform}>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault(); // prevent default form submission
+                  editingPost ? handleUpdatePost() : handleCreatePost();
+                }}
+                className={styles.postform}
+              >
                 <div className={styles.control}>
                   <input
                     type="text"
                     placeholder="Title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
+                    required
                   />
                 </div>
                 <div className={styles.control}>
@@ -128,25 +135,33 @@ export default function PostsPage() {
                     placeholder="Content"
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
+                    required
                   />
                 </div>
                 <div className={styles.control}>
-                  <div className={styles.buttonrow}> 
-                    {editingPost ? (
-                      <button onClick={handleUpdatePost} disabled={loading}>
-                        {loading ? "Updating..." : "Update Post"}
-                      </button>
-                    ) : (
-                      <button onClick={handleCreatePost} disabled={loading}>
-                        {loading ? "Creating..." : "Create Post"}
-                      </button>
-                    )}
+                  <div className={styles.buttonrow}>
+                    <button type="submit" disabled={loading}>
+                      {loading
+                        ? editingPost
+                          ? "Updating..."
+                          : "Creating..."
+                        : editingPost
+                        ? "Update Post"
+                        : "Create Post"}
+                    </button>
                     {editingPost && (
-                      <button onClick={handleCancelEditing}>Cancel Edit</button>
+                      <button
+                        type="button"
+                        onClick={handleCancelEditing}
+                        disabled={loading}
+                      >
+                        Cancel Edit
+                      </button>
                     )}
                   </div>
                 </div>
-              </div>
+              </form>
+
               <ul className={styles.postlist}>
                 {posts.length > 0 ? (
                   posts.map((post) => (
