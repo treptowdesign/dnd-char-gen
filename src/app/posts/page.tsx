@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import styles from "@/app/posts/page.module.sass";
 import { useAuth } from "@/app/components/AuthProvider"; // client side auth
+import styles from "@/app/posts/page.module.sass";
+
 
 type Post = {
   id: number;
@@ -38,7 +39,6 @@ export default function PostsPage() {
   const handleCreatePost = async () => {
     if (!title || !content) return alert("Title and content are required.");
     setLoading(true);
-
     try {
       const res = await fetch("/api/posts", {
         method: "POST",
@@ -53,14 +53,12 @@ export default function PostsPage() {
     } catch (error) {
       console.error("Error creating post:", error);
     }
-
     setLoading(false);
   };
 
   const handleUpdatePost = async () => {
     if (!editingPost || !title || !content) return;
     setLoading(true);
-
     try {
       const res = await fetch(`/api/posts`, {
         method: "PUT",
@@ -78,13 +76,11 @@ export default function PostsPage() {
     } catch (error) {
       console.error("Error updating post:", error);
     }
-
     setLoading(false);
   };
 
   const handleDeletePost = async (id: number) => {
     setLoading(true);
-
     try {
       const res = await fetch(`/api/posts`, {
         method: "DELETE",
@@ -96,7 +92,6 @@ export default function PostsPage() {
     } catch (error) {
       console.error("Error deleting post:", error);
     }
-
     setLoading(false);
   };
 
