@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import styles from "@/app/dashboard/dashboard.module.sass";
-import PageNav from '@/app/components/PageNav';
 
 export default function Dashboard() {
     const [count, setCount] = useState(0);
@@ -15,7 +14,6 @@ export default function Dashboard() {
       <div className={styles.page}>
         <main className={styles.main}>
           <div className={styles.container}>
-            <PageNav />
             <h1 className={styles.title}>Dashboard</h1>
             <div>{ count }</div>
             <button className={styles.button} onClick={() => handleClick(1)}>Inc</button>

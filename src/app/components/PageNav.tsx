@@ -1,13 +1,27 @@
-import Link from 'next/link';
+'use client';
 
-export default function HomePage() {
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import styles from "./PageNav.module.sass";
+
+export default function PageNav() {
+  const pathname = usePathname();
+  const pageLinks = [
+    { href: '/', label: 'Home' },
+    { href: '/dashboard', label: 'Dashboard' },
+    { href: '/posts', label: 'Posts' },
+  ]; 
   return (
-    <div>
-        <ul>
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/dashboard">Dashboard</Link></li>
-            <li><Link href="/posts">Posts</Link></li>
-        </ul>
-    </div>
+    <>
+      <div className={styles.nav}>
+          <ul>
+            {pageLinks.map(({ href, label }) => (
+              <li key={href} className={pathname === href ? styles.active : ""}>
+                <Link href={href}>{ label }</Link>  
+              </li>
+            ))}
+          </ul>
+      </div>
+    </>
   );
 }

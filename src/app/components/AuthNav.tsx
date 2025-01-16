@@ -7,7 +7,7 @@ import RegisterForm from '@/app/components/RegisterForm';
 import LogoutButton from '@/app/components/LogoutButton';
 import { useState } from 'react';
 
-export default function NavBar() {
+export default function AuthNav() {
   const { user } = useAuth(); 
   const [displayLogin, setDisplayLogin] = useState(true);
 

@@ -3,8 +3,6 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "@/app/components/AuthProvider"; // client side auth
 
-import PageNav from '@/app/components/PageNav';
-
 type Post = {
   id: number;
   title: string;
@@ -109,7 +107,6 @@ export default function PostsPage() {
 
   return (
     <div className="posts-container">
-      <PageNav />
       <h1>My Posts</h1>
 
       {user ? (
