@@ -120,6 +120,8 @@ export default function PostsPage() {
 
           <h1 className={styles.title}>My Posts</h1>
 
+          <div className={styles.test}>SASS TEST</div>
+
           {user ? (
             <>
               <form
