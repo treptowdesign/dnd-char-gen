@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
-import styles from "@/app/page.module.css";
-import  "@/app/test.sass";
+import styles from "@/app/dashboard/page.module.sass";
 
 const List = ({children} : { children: ReactNode }) => {
   return (
