@@ -35,7 +35,7 @@ export const characterSheet = z.object({
     hitPoints: z.number().int().describe("The total hit points of the character"),
     armorClass: z.number().int().describe("The armor class of the character"),
     speed: z.number().int().describe("The speed of the character in feet per round"),
-    backstory: z.string().describe("Text blurb about the character and his/her background and history")
+    description: z.string().describe("Text blurb about the character and his/her background and history")
 });
 
 // inferred TypeScript type
