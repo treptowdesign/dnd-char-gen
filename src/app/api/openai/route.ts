@@ -4,7 +4,7 @@ import { zodResponseFormat } from "openai/helpers/zod";
 import { characterSheet } from "@/schema/characterSheet"; // character sheet schema
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY!, 
+  apiKey: process.env.SECRET_API_KEY!, 
 });
 
 // const JokeStructure = z.object({

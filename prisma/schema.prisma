@@ -19,6 +19,7 @@ model User {
   password  String
   createdAt DateTime @default(now())
   posts     Post[]
+  characters Character[]
 }
 
 model Post {
@@ -30,6 +31,19 @@ model Post {
   authorId  Int
   author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
 }
+
+model Character {
+  id          Int      @id @default(autoincrement())
+  name        String
+  class       String
+  race        String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
 
 // ...after updating schema with a new model: "MODEL_NAME"
 // npx prisma format
