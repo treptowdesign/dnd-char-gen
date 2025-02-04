@@ -13,8 +13,8 @@ import prisma from '../models/prismaClient';
 
 async function testDb() {
   try {
-    const posts = await prisma.post.findMany();
-    console.log('Posts:', posts);
+    const characters = await prisma.character.findMany();
+    console.log('Posts:', characters);
   } catch (error) {
     console.error('Error testing DB:', error);
   } finally {
