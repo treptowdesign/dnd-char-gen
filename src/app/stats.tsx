@@ -48,7 +48,7 @@ const Stats: React.FC<StatsProps> = ({ character, onCharacterSaved }) => {
 
     try {
       const res = await fetch("/api/characters", {
-        method: editedCharacter.id ? "PUT" : "POST", // Use PUT for updates, POST for new characters
+        method: editedCharacter.id ? "PUT" : "POST", // use PUT for updates, POST for new characters
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(editedCharacter),
       });
@@ -58,7 +58,7 @@ const Stats: React.FC<StatsProps> = ({ character, onCharacterSaved }) => {
         setSaved(true);
         setIsEditing(false);
 
-        // If it was a new character, update the ID and notify page.tsx
+        // if it was a new character, update the ID and notify page.tsx
         setEditedCharacter((prev) => prev ? { ...prev, id: data.id } : prev);
         onCharacterSaved(data); // update parent
       } else {

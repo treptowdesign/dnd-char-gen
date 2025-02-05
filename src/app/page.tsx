@@ -26,10 +26,10 @@ export default function Home() {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [activeCharacter, setActiveCharacter] = useState<Character | null>(null);
 
-  // Fetch characters once on mount
+  // fetch characters once on mount
   useEffect(() => {
     if (!user) {
-      // Clear active character and characters when logging out
+      // clear active character and characters when logging out
       setCharacters([]);
       setActiveCharacter(null);
       return;
@@ -50,7 +50,7 @@ export default function Home() {
     };
 
     fetchCharacters();
-  }, [user]); // Refetch when user logs in
+  }, [user]); // refetch when user logs in
 
   const handleCharacterGenerated = (character: Character) => {
     setActiveCharacter(character);
@@ -59,10 +59,10 @@ export default function Home() {
   const handleCharacterSaved = (newCharacter: Character) => {
     setCharacters((prev) =>
       prev.some((char) => char.id === newCharacter.id)
-        ? prev.map((char) => (char.id === newCharacter.id ? newCharacter : char)) // Update existing
+        ? prev.map((char) => (char.id === newCharacter.id ? newCharacter : char)) // update existing
         : [...prev, newCharacter] // Add new
     );
-    // Update the active character to include its new ID for stats
+    // update the active character to include its new ID for stats
     setActiveCharacter(newCharacter);
   };
 
@@ -70,7 +70,7 @@ export default function Home() {
     setCharacters((prev) => prev.filter((char) => char.id !== deletedId));
 
     if (activeCharacter?.id === deletedId) {
-      setActiveCharacter(null); // Clear if the deleted character was selected
+      setActiveCharacter(null); // clear if the deleted character was selected
     }
   };
 

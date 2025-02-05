@@ -35,12 +35,12 @@ export default function Prompt({ onCharacterGenerated }: PromptProps) {
       const data = await res.json();
 
       if (res.ok) {
-        // Extract only the required fields
+        // get only the required fields
         const character = {
           name: data.response.name,
           class: data.response.class,
           race: data.response.race,
-          description: data.response.description, // Mapping backstory -> description
+          description: data.response.description,
         };
         onCharacterGenerated(character);
       } else {
