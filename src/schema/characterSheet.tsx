@@ -65,7 +65,6 @@ export const characterSheet = z.object({
         "Lawful Neutral", "True Neutral", "Chaotic Neutral",
         "Lawful Evil", "Neutral Evil", "Chaotic Evil"
     ]).describe("The alignment of the character"),
-    background: z.string().describe("The background of the character, e.g., Soldier, Noble"),
     description: z.string().describe("Text blurb about the character and his/her background and history")
 });
 
