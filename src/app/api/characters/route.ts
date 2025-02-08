@@ -1,20 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from '@/models/prismaClient';
 import { getUserFromServer } from "@/app/lib/auth"; // server side auth
+import { characterSheet } from "@/schema/characterSheet"; 
 
 // CREATE a new character
 export async function POST(req: NextRequest) {
+  // console.log('CREATE');
   try {
     const user = await getUserFromServer();
     if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-    const { name, class: characterClass, race, description, alignment } = await req.json();
-    if (!name || !characterClass || !race || !description || !alignment) {
-      return NextResponse.json({ error: "All fields are required" }, { status: 400 });
+    const body = await req.json();
+    const validationResult = characterSheet.safeParse(body); // Validate input
+
+    if (!validationResult.success) {
+      return NextResponse.json({ error: validationResult.error.format() }, { status: 400 });
     }
 
     const character = await prisma.character.create({
-      data: { name, class: characterClass, race, description, userId: user.id, alignment },
+      data: { ...validationResult.data, userId: user.id },
     });
 
     return NextResponse.json(character, { status: 201 });
@@ -26,6 +30,7 @@ export async function POST(req: NextRequest) {
 
 // READ all characters for the logged-in user
 export async function GET(req: NextRequest) {
+  // console.log('READ');
   try {
     const user = await getUserFromServer();
     if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -44,18 +49,21 @@ export async function GET(req: NextRequest) {
 
 // UPDATE a character
 export async function PUT(req: NextRequest) {
+  // console.log('UPDATE');
   try {
     const user = await getUserFromServer();
     if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-    const { id, name, class: characterClass, race, description, alignment } = await req.json();
-    if (!id || !name || !characterClass || !race || !description || !alignment) {
-      return NextResponse.json({ error: "All fields are required" }, { status: 400 });
+    const body = await req.json();
+    const validationResult = characterSheet.partial().safeParse(body); // Allow partial updates
+
+    if (!validationResult.success) {
+      return NextResponse.json({ error: validationResult.error.format() }, { status: 400 });
     }
 
     const character = await prisma.character.update({
-      where: { id, userId: user.id },
-      data: { name, class: characterClass, race, description, alignment },
+      where: { id: body.id, userId: user.id },
+      data: validationResult.data,
     });
 
     return NextResponse.json(character, { status: 200 });
@@ -67,6 +75,7 @@ export async function PUT(req: NextRequest) {
 
 // DELETE a character
 export async function DELETE(req: NextRequest) {
+  // console.log('DELETE');
   try {
     const user = await getUserFromServer();
     if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
