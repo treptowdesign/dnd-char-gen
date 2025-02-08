@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
     if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const body = await req.json();
-    const validationResult = characterSheet.safeParse(body); // Validate input
+    const validationResult = characterSheet.safeParse(body); // validate input
 
     if (!validationResult.success) {
       return NextResponse.json({ error: validationResult.error.format() }, { status: 400 });
@@ -55,7 +55,7 @@ export async function PUT(req: NextRequest) {
     if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const body = await req.json();
-    const validationResult = characterSheet.partial().safeParse(body); // Allow partial updates
+    const validationResult = characterSheet.partial().safeParse(body); // allow partial updates
 
     if (!validationResult.success) {
       return NextResponse.json({ error: validationResult.error.format() }, { status: 400 });
