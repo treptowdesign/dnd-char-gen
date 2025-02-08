@@ -8,9 +8,10 @@ interface StatsProps {
     name: string;
     class: string;
     race: string;
+    alignment: string;
     description: string;
   } | null;
-  onCharacterSaved: (character: { id?: number; name: string; class: string; race: string; description: string }) => void;
+  onCharacterSaved: (character: { id?: number; name: string; class: string; race: string; alignment: string; description: string }) => void;
 }
 
 const Stats: React.FC<StatsProps> = ({ character, onCharacterSaved }) => {
@@ -89,23 +90,28 @@ const Stats: React.FC<StatsProps> = ({ character, onCharacterSaved }) => {
             <input type="text" name="race" value={editedCharacter?.race} onChange={handleChange} />
           </label>
           <label>
+            <strong>Alignment:</strong>
+            <textarea name="alignment" value={editedCharacter?.alignment} onChange={handleChange} />
+          </label>
+          <label>
             <strong>Description:</strong>
             <textarea name="description" value={editedCharacter?.description} onChange={handleChange} />
           </label>
 
-          <button onClick={saveCharacter} disabled={saving}>
+          <button className="inline" onClick={saveCharacter} disabled={saving}>
             {saving ? "Saving..." : "Save Character"}
           </button>
-          <button onClick={toggleEdit}>Cancel</button>
+          <button className="inline" onClick={toggleEdit}>Cancel</button>
         </>
       ) : (
         <>
           <p><strong>Class:</strong> {editedCharacter?.class}</p>
           <p><strong>Race:</strong> {editedCharacter?.race}</p>
+          <p><strong>Alignment:</strong> {editedCharacter?.alignment}</p>
           <p><strong>Description:</strong> {editedCharacter?.description}</p>
 
-          <button onClick={toggleEdit}>Edit Character</button>
-          <button onClick={saveCharacter} disabled={saving || saved}>
+          <button className="inline" onClick={toggleEdit}>Edit Character</button>
+          <button className="inline" onClick={saveCharacter} disabled={saving || saved}>
             {saving ? "Saving..." : saved ? "Saved!" : "Save Character"}
           </button>
         </>

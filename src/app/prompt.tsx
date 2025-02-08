@@ -9,6 +9,7 @@ interface PromptProps {
     name: string;
     class: string;
     race: string;
+    alignment: string;
     description: string;
   }) => void;
 }
@@ -40,6 +41,7 @@ export default function Prompt({ onCharacterGenerated }: PromptProps) {
           name: data.response.name,
           class: data.response.class,
           race: data.response.race,
+          alignment: data.response.alignment,
           description: data.response.description,
         };
         onCharacterGenerated(character);

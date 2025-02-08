@@ -7,6 +7,7 @@ interface Character {
   name: string;
   class: string;
   race: string;
+  alignment: string;
   description: string;
 }
 
@@ -44,10 +45,10 @@ const CharacterList: React.FC<CharacterListProps> = ({ characters, onSelectChara
         <ul>
           {characters.map((char) => (
             <li key={char.id}>
-              <button onClick={() => onSelectCharacter(char)}>
+              <button className="inline" onClick={() => onSelectCharacter(char)}>
                 {char.name} ({char.class} - {char.race})
               </button>
-              <button onClick={() => handleDelete(char.id!)}>Delete</button>
+              <button className="inline" onClick={() => handleDelete(char.id!)}>Delete</button>
             </li>
           ))}
         </ul>

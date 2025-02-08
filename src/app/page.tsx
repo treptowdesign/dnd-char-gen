@@ -17,6 +17,7 @@ interface Character {
   name: string;
   class: string;
   race: string;
+  alignment: string;
   description: string;
 }
 
@@ -60,7 +61,7 @@ export default function Home() {
     setCharacters((prev) =>
       prev.some((char) => char.id === newCharacter.id)
         ? prev.map((char) => (char.id === newCharacter.id ? newCharacter : char)) // update existing
-        : [...prev, newCharacter] // Add new
+        : [...prev, newCharacter] // add new
     );
     // update the active character to include its new ID for stats
     setActiveCharacter(newCharacter);

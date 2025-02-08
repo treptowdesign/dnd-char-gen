@@ -37,6 +37,7 @@ model Character {
   name        String
   class       String
   race        String
+  alignment   String @default("True Neutral")
   description String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -45,7 +46,14 @@ model Character {
 }
 
 
+// npx prisma studio
+
+// ADING NEW MODEL
 // ...after updating schema with a new model: "MODEL_NAME"
 // npx prisma format
 // npx prisma migrate dev --name add_MODEL_NAME_model
 // npx prisma generate
+
+// ADDING NEW FIELD TO EXISTING MODEL
+// npx prisma migrate dev --name add_FIELD_to_MODEL
+// npx prisma migrate dev --name add_alignment_to_character
