@@ -45,6 +45,7 @@ export default function Prompt({ onCharacterGenerated }: PromptProps) {
           description: data.response.description,
         };
         onCharacterGenerated(character);
+        console.log("Tokens Used:", data.total_tokens);
       } else {
         console.error("Error:", data.error);
       }
