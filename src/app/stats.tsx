@@ -20,9 +20,9 @@ const Stats: React.FC<StatsProps> = ({ character, onCharacterSaved }) => {
   const [editedCharacter, setEditedCharacter] = useState(character);
 
   useEffect(() => {
-    // Reset state when a new character is selected
+    // reset state when a new character is selected
     setEditedCharacter(character);
-    setSaved(false); // Reset save state when switching characters
+    setSaved(false); // reset save state when switching characters
   }, [character]);
 
   if (!character) {
@@ -31,7 +31,7 @@ const Stats: React.FC<StatsProps> = ({ character, onCharacterSaved }) => {
 
   const toggleEdit = () => {
     setIsEditing(!isEditing);
-    setEditedCharacter(character); // Reset changes when toggling
+    setEditedCharacter(character); // reset changes when toggling
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
